@@ -1,0 +1,24 @@
+[submodule "agribot_common"]
+	path = agribot_common
+	url = https://github.com/panpawelchmiel/agribot_common.git
+  branch = develop
+[submodule "agribot_description"]
+	path = agribot_description
+	url = https://github.com/panpawelchmiel/agribot_description.git
+  branch = develop
+[submodule "agribot_map"]
+	path = agribot_map
+	url = https://github.com/panpawelchmiel/agribot_map.git
+  branch = develop
+[submodule "agribot_navigation"]
+	path = agribot_navigation
+	url = https://github.com/panpawelchmiel/agribot_navigation.git
+  branch = develop
+[submodule "agribot_msgs"]
+	path = agribot_msgs
+	url = https://github.com/panpawelchmiel/agribot_msgs.git
+  branch = develop
+[submodule "agribot_bringup"]
+	path = agribot_bringup
+	url = https://github.com/panpawelchmiel/agribot_bringup.git
+  branch = develop
