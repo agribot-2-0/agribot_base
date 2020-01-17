@@ -7,6 +7,9 @@ pipelines:
            - docker
          script:
            - apk add --update bash coreutils tar
+           - cd agribot_base
+           - git submodule update --init --recursive
+           - cd ..
            - git clone --quiet --depth 1 https://github.com/ros-industrial/industrial_ci .industrial_ci -b master
            - .industrial_ci/bitbucket.sh ROS_DISTRO=melodic
 
