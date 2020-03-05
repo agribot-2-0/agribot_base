@@ -26,4 +26,4 @@
 	branch = master
 [submodule "agribot_commander"]
 	path = agribot_commander
-	url = https://bitbucket.org/agribotteam/agribot_commander
+	url = https://github.com/panpawelchmiel/agribot_commander.git
