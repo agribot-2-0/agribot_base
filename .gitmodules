@@ -30,3 +30,6 @@
 [submodule "open_street_map"]
 	path = open_street_map
 	url = https://github.com/panpawelchmiel/open_street_map.git
+[submodule "agribot_monitoring"]
+	path = agribot_monitoring
+	url = https://github.com/panpawelchmiel/agribot_monitoring.git
