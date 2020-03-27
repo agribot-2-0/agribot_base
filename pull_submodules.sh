@@ -13,7 +13,7 @@ function check_for_errors () {
         echo -e "$1\e[0m"
         return
     fi
-    if [[ $1 == *"fatal:"* ]] || [[ $1 == *"error:"* ]]
+    if [[ $1 == *"fatal:"* ]]
     then
         problem_detected="error"
         echo -e "\e[31m[ERROR]: Some error occurred:"
@@ -100,6 +100,7 @@ do
     status="$status $(git remote update origin --prune 2>&1)"
     commit=$(echo $(git log -1 --all --date-order) | awk -F 'commit | ' '{print $2}')
     branch=$(git branch --contains $commit | cut -c 3-)
+    echo $branch
     if [ -z $branch ]
     then
         branch=$(git branch -a --all --contains $commit | cut -c 18-)
