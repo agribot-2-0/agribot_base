@@ -33,3 +33,9 @@
 [submodule "agribot_monitoring"]
 	path = agribot_monitoring
 	url = https://github.com/panpawelchmiel/agribot_monitoring.git
+[submodule "agribot_obstacle_detection"]
+	path = agribot_obstacle_detection
+	url = https://github.com/panpawelchmiel/agribot_obstacle_detection.git
+[submodule "rviz_visual_tools"]
+	path = rviz_visual_tools
+	url = https://github.com/panpawelchmiel/rviz_visual_tools.git
