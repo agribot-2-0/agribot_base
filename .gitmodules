@@ -27,9 +27,6 @@
 [submodule "agribot_commander"]
 	path = agribot_commander
 	url = https://github.com/panpawelchmiel/agribot_commander.git
-[submodule "open_street_map"]
-	path = open_street_map
-	url = https://github.com/panpawelchmiel/open_street_map.git
 [submodule "agribot_monitoring"]
 	path = agribot_monitoring
 	url = https://github.com/panpawelchmiel/agribot_monitoring.git
