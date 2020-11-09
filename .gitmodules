@@ -36,3 +36,6 @@
 [submodule "rviz_visual_tools"]
 	path = rviz_visual_tools
 	url = https://github.com/panpawelchmiel/rviz_visual_tools.git
+[submodule "agribot_tools_management"]
+	path = agribot_tools_management
+	url = https://github.com/panpawelchmiel/agribot_tools_management.git
