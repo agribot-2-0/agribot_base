@@ -16,10 +16,6 @@
 [submodule "agribot_bringup"]
 	path = agribot_bringup
 	url = https://github.com/panpawelchmiel/agribot_bringup.git
-[submodule "agribot_teleop"]
-	path = agribot_teleop
-	url = https://github.com/panpawelchmiel/agribot_teleop.git
-	branch = master
 [submodule "agribot_localization"]
 	path = agribot_localization
 	url = https://github.com/panpawelchmiel/agribot_localization.git
