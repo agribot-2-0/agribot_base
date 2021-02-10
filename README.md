@@ -7,9 +7,9 @@
 ![component](doc/component_diagram.png)
 
 
-# [DEPRECATED] Robot architecure
+# Network architecure
 
-![overview](doc/architecture_overview.png)
+![overview](doc/network_architecture.png)
 
 # [DEPRECATED] Sensors placemanet
 
