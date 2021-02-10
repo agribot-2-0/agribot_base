@@ -1,0 +1,54 @@
+@startuml
+
+!define GCPPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-icons-GCP/master/dist
+!include GCPPuml/GCPCommon.puml
+!include GCPPuml/Compute/Cloud_Functions.puml
+!include GCPPuml/Storage/Cloud_Storage.puml
+!include GCPPuml/Databases/Cloud_Firestore.puml
+
+!include <material/common>
+!include <material/timer.puml>
+
+/'
+The other icons will need to come from other stdlib libraries: backup, users, clients.
+'/
+!include <awslib/AWSCommon>
+!include <awslib/AWSSimplified.puml>
+!include <awslib/general/all.puml>
+
+
+' skinparam linetype ortho
+
+
+package "Agribot User" {
+    User(User, "User", " ")
+}
+
+package "Robot" {
+    Client(Agribot, "Industrial PC", " ")
+}
+
+package "Google Cloud Platform" {
+    Cloud_Storage(Cloud_Paths, "Paths", "Cloud Storage")
+
+    together {
+        Cloud_Functions(Cloud_Wakeup, "Wakeup Robot", "Cloud Functions")
+        Cloud_Functions(Cloud_Schedule, "Schedule Tasks", "Cloud Functions")
+        Cloud_Firestore(Cloud_Tasks, "Tasks", "Cloud Firestore")
+    }
+
+    Cloud_Paths -[hidden]d-> Cloud_Tasks
+}
+
+
+User -> Cloud_Paths : Add Path
+User -> Cloud_Tasks : Add Task
+
+Cloud_Tasks -> Cloud_Schedule
+
+Cloud_Schedule -> Cloud_Wakeup
+
+Cloud_Wakeup -> Agribot
+Cloud_Paths -> Agribot
+
+@enduml
