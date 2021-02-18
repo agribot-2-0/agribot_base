@@ -32,12 +32,18 @@ package "Google Cloud Platform" {
     Cloud_Storage(Cloud_Paths, "Paths", "Cloud Storage")
 
     together {
-        Cloud_Functions(Cloud_Wakeup, "Wakeup Robot", "Cloud Functions")
-        Cloud_Functions(Cloud_Schedule, "Schedule Tasks", "Cloud Functions")
         Cloud_Firestore(Cloud_Tasks, "Tasks", "Cloud Firestore")
+        Cloud_Functions(Cloud_Schedule, "Schedule Tasks", "Cloud Functions")
+        Cloud_Firestore(Current_Task, "Current Task", "Cloud Firestore")
+        Cloud_Functions(Cloud_Wakeup, "Wakeup Robot", "Cloud Functions")
     }
 
+    Cloud_Firestore(Cloud_Monitoring, "Robot State", "Cloud Firestore")
+
     Cloud_Paths -[hidden]d-> Cloud_Tasks
+    Cloud_Wakeup -[hidden]d-> Cloud_Monitoring
+
+
 }
 
 
@@ -45,10 +51,14 @@ User -> Cloud_Paths : Add Path
 User -> Cloud_Tasks : Add Task
 
 Cloud_Tasks -> Cloud_Schedule
+Cloud_Schedule -> Current_Task
+Current_Task -> Cloud_Wakeup
 
-Cloud_Schedule -> Cloud_Wakeup
+Cloud_Wakeup -> Agribot : Wakeup
+Cloud_Paths -> Agribot : Dowload Path
 
-Cloud_Wakeup -> Agribot
-Cloud_Paths -> Agribot
+
+User <- Cloud_Monitoring
+Cloud_Monitoring <- Agribot
 
 @enduml
