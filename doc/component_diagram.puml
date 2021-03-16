@@ -5,10 +5,10 @@
 () "Lidar data \n sensor_msgs/LaserScan.msg" as ObstacleDetectionSensors
 
 () "/agribot/gnss \n sensor_msgs/NavSatFix.msg \n\n \
-/agribot/heading \n sensor_msgs/Imu.msg \n\n \
-/agribot/imu \n sensor_msgs/Imu.msg \n\n \
-/agribot/magnetic_field \n sensor_msgs/MagneticField.msg \n\n \
-/agribot/inclinometer \n sensor_msgs/Imu.msg" as LocalizationSensors
+/agribot/imu/raw/data \n sensor_msgs/Imu.msg \n\n \
+/agribot/imu/raw/mag \n sensor_msgs/MagneticField.msg \n\n \
+/agribot/encoder/caterpillar \n agribot_msgs/AgribotCaterpillar.msg \n\n \
+/agribot/encoder/(front/back) \n std_msgs/Float32.msg" as LocalizationSensors
 
 () "/cmd_vel_manual \n \
 agribot_msgs/AgribotManualControl.msg" as ManualControl
