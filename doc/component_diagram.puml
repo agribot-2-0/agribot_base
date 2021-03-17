@@ -55,7 +55,7 @@ package AgribotBase {
     ' }
 
     ' rectangle {
-        () "\n /agribot/odom/global \n nav_msgs/Odometry.msg" as Odometry
+        () "\n /agribot/odom/local \n nav_msgs/Odometry.msg" as Odometry
         () "\n /move_base/AgribotPlannerROS/local_path \n nav_msgs/Path.msg" as LocalPath
         
         [agribot_navigation]
