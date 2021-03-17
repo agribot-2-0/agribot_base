@@ -1,0 +1,109 @@
+@startuml
+
+' Input Interfaces
+' rectangle {
+() "Lidar data \n sensor_msgs/LaserScan.msg" as ObstacleDetectionSensors
+
+() "/agribot/gnss \n sensor_msgs/NavSatFix.msg \n\n \
+/agribot/imu/raw/data \n sensor_msgs/Imu.msg \n\n \
+/agribot/imu/raw/mag \n sensor_msgs/MagneticField.msg \n\n \
+/agribot/encoder/caterpillar \n agribot_msgs/AgribotCaterpillar.msg \n\n \
+/agribot/encoder/(front/back) \n std_msgs/Float32.msg" as LocalizationSensors
+
+() "/cmd_vel_manual \n \
+agribot_msgs/AgribotManualControl.msg" as ManualControl
+() "/agribot/encoder/cart/(front/back) \n \
+std_msgs/Float32.msg" as EncoderCart
+() "/agribot/encoder/caterpillar \n \
+agribot_msgs/AgtibotCanterpilar.msg" as EncoderCaterpillar
+' }
+
+' Output Interfaces
+() "/agribot/control/caterpillar \n \
+agribot_msgs/AgtibotCanterpilar.msg" as ControlCaterpillar
+
+package AgribotBase {
+    ' Internal Interfaces
+    () "/robot/rsn/actual_task" as CloudActualTask
+
+    () "Agribot Task in YAML" as Task
+    () "/map \n nav_msgs/GetMap.msg" as Map
+    () "/move_base/goal" as MoveBaseGoal
+    () "/move_base/result" as MoveBaseResult
+    () "/cmd_vel_arbiter_node/swich_to_(navigation, teleop, stop)\nstd_srvs/Empty.srv" as CmdVelArbiter
+    () "/agribot/obstacle_detected \n agribot_msgs/AgribotObstacleDetection.msg" as ObstacleDetection
+    
+
+    ' package "Navigation input data" {
+        () "\n Tasks definition in database" as CloudTask
+        () "\n Agribot Path in KML" as CloudPath
+
+        [Cloud Firestore]
+        [Cloud Storage]
+        [agribot_map] 
+        ' [agribot_monitoring]
+    
+        [Cloud Firestore] - CloudTask
+        CloudTask )- [agribot_map]
+
+        [agribot_map] -( CloudPath
+        CloudPath - [Cloud Storage]
+    ' }
+
+    ' package {
+        [agribot_commander]
+    ' }
+
+    ' rectangle {
+        () "\n /agribot/odom/local \n nav_msgs/Odometry.msg" as Odometry
+        () "\n /move_base/AgribotPlannerROS/local_path \n nav_msgs/Path.msg" as LocalPath
+        
+        [agribot_navigation]
+        [agribot_localization]
+        [agribot_obstacle_detection]
+        ' [agribot_tool_management]
+        
+        [agribot_obstacle_detection] -( LocalPath
+        LocalPath - [agribot_navigation]
+
+        [agribot_navigation] -( Odometry
+        Odometry - [agribot_localization]
+
+    ' }
+
+    ' Connections
+    [Cloud Firestore] -- CloudActualTask
+    [agribot_map] -- Task
+
+    Task )-- [agribot_commander]
+    CloudActualTask )-- [agribot_commander]
+
+    [agribot_commander] -- MoveBaseGoal
+    [agribot_commander] -- CmdVelArbiter
+    [agribot_commander] --( MoveBaseResult
+    [agribot_commander] --( ObstacleDetection
+    [agribot_map] -- Map
+
+
+    ObstacleDetection -- [agribot_obstacle_detection]
+
+    MoveBaseGoal )-- [agribot_navigation]
+    MoveBaseResult -- [agribot_navigation]
+    CmdVelArbiter )-- [agribot_navigation]
+    Map )-- [agribot_navigation]
+
+}
+
+[agribot_obstacle_detection] --( ObstacleDetectionSensors
+
+[agribot_navigation] --( ManualControl
+[agribot_navigation] --( EncoderCart
+
+[agribot_localization] --( EncoderCart
+[agribot_localization] --( EncoderCaterpillar
+[agribot_localization] --( LocalizationSensors
+
+
+[agribot_navigation] -- ControlCaterpillar
+
+@enduml

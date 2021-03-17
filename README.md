@@ -1,11 +1,16 @@
-# Architecure overview
+# Cloud architecture
 
-![overview](doc/architecture_overview.png)
+![component](doc/cloud.png)
 
-# Sensors placemanet
+# Agribot Base component diagram
+
+![component](doc/component_diagram.png)
+
+
+# Network architecure
+
+![overview](doc/network_architecture.png)
+
+# [DEPRECATED] Sensors placemanet
 
 ![overview](doc/sensors_placemanet.png)
-
-# Component view
-
-![component](doc/architecture.png)

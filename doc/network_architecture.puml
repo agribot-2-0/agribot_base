@@ -1,0 +1,87 @@
+@startuml
+nwdiag {
+    Internet [ shape = cloud];
+    Internet -- Router;
+
+    network USB {
+
+        Router;
+        WeatherStation;
+    }
+
+    network PalSignal {
+        
+        Advantech [address = "/dev/video0"];
+        Cameras;
+    }
+
+    network internal {
+        address = "10.0.x.x"
+
+        Router [address = "10.0.0.1"];
+        Advantech [address = "10.0.1.2"];
+    } 
+
+    network switch {
+        address = "192.168.0.x"
+
+        Advantech [address = "192.168.0.1"];
+        Rfid [address = "192.168.0.66"];
+        Lidar [address = ""];
+    }
+
+    network CanBusApplication {
+        address = "raw data";
+
+        Advantech [address = "/dev/can1"];
+        TTControl [address = "CAN3"];
+        BluetoothBridge [address = ""];
+    }
+
+    network CanBusSensors {
+        address = "SAE J1939"
+
+        Advantech [address = "/dev/can0 0xC8"];
+        TTControl [address = "CAN5 0x64"];
+        HydraboxGPS [address = "0x65"];
+        ChassisInclinometer [address = "0x19"];
+        OilLevelSensor [address = "0xE1"];
+        FuelLevelSensor [address = "0xE0"];
+
+        TplFrontLinearInclinometer [address = "0x7E"];
+        TplFrontAngularInclinometer [address = "0x7C"];
+        TplBackLinearInclinometer [address = "0x7F"];
+        TplBackAngularInclinometer [address = "0x7D"];
+
+    }
+
+    network CanBusActuators {
+        address = "SAE J1939"
+
+        TTControl [address = "CAN6 0x03"];
+        EMR4 [address = "0x00"];
+        SalamiFront [address = "0x80-0x87"];
+        SalamiBack [address = "0x88-0x8F"];
+    }
+
+
+
+    network DigitalInput {
+        
+        TTControl;
+        ChartRotationEncoder [address = "2 x quadrature"];
+        HydraulicEngineEncoder [address = "4 x quadrature"];
+    }
+
+    network DigitalOutput {
+        
+        TTControl;
+        OilCoolerFan [address = "PWM"];
+        DrivePumpsCoil [address = "8 x PWM"];
+    }
+
+
+}
+
+}
+@enduml
