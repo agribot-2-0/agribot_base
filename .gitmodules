@@ -38,3 +38,6 @@
 [submodule "imu_pipeline"]
 	path = imu_pipeline
 	url = https://github.com/agribot/imu_pipeline.git
+[submodule "agribot_diagnostics"]
+	path = agribot_diagnostics
+	url = https://github.com/panpawelchmiel/agribot_diagnostics.git
